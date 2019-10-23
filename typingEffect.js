@@ -6,10 +6,7 @@ function typingEffect(greet, { user_data, loop = true, typeSpeed = 120, backspac
 			greet.innerHTML = user_data[count].substring(0, i) + "|";
 			if (i == user_data[count].length) {
 				clearInterval(status);
-				setTimeout((loop) => {
-					if (loop)
-						strDelete(count); // Call strDelete function to delete string from display
-				}, backspacePause, loop);
+				setTimeout((loop) => { if (loop) strDelete(count) }, backspacePause, loop); // Call strDelete function to delete string from display
 			}
 			++i;
 		}, typeSpeed, count);
@@ -21,15 +18,8 @@ function typingEffect(greet, { user_data, loop = true, typeSpeed = 120, backspac
 			greet.innerHTML = user_data[count].substring(0, i) + "|";
 			if (i == 0) {
 				clearInterval(status);
-				if (++count < user_data.length) {
-					setTimeout(() => {
-						strDisplay(count); // Again call display function to display next set of strings
-					}, 100);
-				} else {
-					setTimeout(() => {
-						strDisplay(0); // Repeat the loop of typing all over again
-					}, 100);
-				}
+				if (++count < user_data.length) setTimeout(() => strDisplay(count), 100);
+				else setTimeout(() => strDisplay(0), 100);// Repeat the loop of typing all over again
 			}
 			--i;
 		}, delSpeed, count);
